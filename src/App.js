@@ -14,6 +14,8 @@ import Cart from './components/Cart';
 import Verify from './components/Verify';
 import { CartProvider } from "./components/CartContext";
 import OrderHistory from "./components/OrderHistory";
+import Success from './components/Success';
+import FailTransaction from "./components/FailTransaction";
 function App() {
   
   return (
@@ -36,6 +38,8 @@ function App() {
           <Route path='/cart' element = {<Cart/>}/>
           <Route path='/cart/verify' element = {<Verify/>}/>
           <Route path='/order/history' element = {<OrderHistory/>}/>
+          <Route path='/success' element = {<Success/>}/>
+          <Route path='/fail' element = {<FailTransaction/>}/>
         </Routes>
           </Col>
         </Row>

@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import axios from 'axios';
-import  CartContext  from "./CartContext";
+import CartContext from "./CartContext";
 import moment from 'moment';
 const Verify = () => {
     const [user, setUser] = useState({});
-    const {totalPrice} = useContext(CartContext);
+    const { totalPrice } = useContext(CartContext);
     useEffect(() => {
         if (localStorage.getItem('verifiedUser')) {
             setUser(JSON.parse(localStorage.getItem('verifiedUser')));
@@ -35,39 +35,24 @@ const Verify = () => {
                     address: user.address
                 };
                 const products = JSON.parse(localStorage.getItem('cart'));
-                const currentDate = moment();
-const formattedDate = currentDate.format('YYYY-MM-DD HH:mm'); // Định dạng ngày tháng năm (VD: '20/04/2024')
-
+                const date = moment().format('YYYY-MM-DD');
                 const orderDetail = {
-                    OrderDate: formattedDate,
+                    orderDate: date,
                     customer: customerInfo,
                     products: products
                 }
-                await axios.post(`http://localhost:3000/DetailOrders`, orderDetail)
-                    .then(response => {
-                        console.log('Order details saved to database:', response.data.status);
-                    })
-                    .catch(error => {
-                        console.error('Error saving order details to database:', error);
-                    });
-
+                console.log(orderDetail);
                 const response = await axios.post(`http://localhost:5000/api/create_payment_url`, {
                     amount: totalPrice,
                     bankCode: "",
-                    language: "vn"
+                    language: "vn",
+                    customer: customerInfo,
+                    products: products
                 });
-                
-                window.location.href = response.data.redirectUrl;
+
+                window.location.href = `${response.data.redirectUrl}` ;
             } catch (error) {
-                if (error.response && error.response.data) {
-                    console.log(error.response.data);
-                    // Hiển thị thông báo lỗi cho người dùng
-                    alert("Có lỗi xảy ra trong quá trình xử lý. Vui lòng liên hệ 1900 55 55 77 để được hỗ trợ.");
-                } else {
-                    console.log(error);
-                    // Hiển thị thông báo lỗi chung cho người dùng
-                    alert("Đã xảy ra lỗi. Vui lòng thử lại sau.");
-                }
+                alert("Đã xảy ra lỗi. Vui lòng thử lại sau.");
             }
         }
         sendRequest();

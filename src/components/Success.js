@@ -1,8 +1,10 @@
-const Success = ({ code }) => {
+import { Link } from "react-router-dom";
+
+const Success = () => {
     return (
         <div>
             <h1>Order Success</h1>
-            <p>Code: {code}</p>
+            <Link to="/">Home</Link>
         </div>
     );
 }
