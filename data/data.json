@@ -1,0 +1,218 @@
+{
+  "products": [
+    {
+      "id": "P02",
+      "name": "May Tinh Pana",
+      "price": 10000,
+      "quantity": 100,
+      "cataID": 1,
+      "createAt": "2024-04-18",
+      "isActive": true,
+      "image": "../images/1.jpg"
+    },
+    {
+      "id": "P03",
+      "name": "Noi Com Pana",
+      "price": 10,
+      "quantity": 5,
+      "cataID": 2,
+      "createAt": "2022-10-10",
+      "isActive": false,
+      "image": "../images/1.jpg"
+    },
+    {
+      "id": "P04",
+      "name": "Tu Lanh Pane",
+      "price": 10,
+      "quantity": 5,
+      "cataID": 3,
+      "createAt": "2022-10-10",
+      "isActive": true,
+      "image": "../images/2.jpg"
+    },
+    {
+      "id": "P05",
+      "name": "Tu Lanh Pane",
+      "price": 10,
+      "quantity": 5,
+      "cataID": 3,
+      "createAt": "2022-10-10",
+      "isActive": true,
+      "image": "../images/1.jpg"
+    }
+  ],
+  "category": [
+    {
+      "id": "1",
+      "name": "Máy Tính"
+    },
+    {
+      "id": "2",
+      "name": "Điện Tử - Điện Lạnh"
+    },
+    {
+      "id": "3",
+      "name": "Thiết Bị Mạng"
+    }
+  ],
+  "account": [
+    {
+      "id": "dsaf22q3132",
+      "email": "hn54707@gmail.com",
+      "password": "12345678",
+      "gender": "Male",
+      "dob": "2000-01-01",
+      "role": "admin"
+    },
+    {
+      "id": "53be",
+      "email": "hoanganh30082003@gmail.com",
+      "password": "30082003",
+      "dob": "2024-04-18",
+      "gender": "male",
+      "role": "user"
+    }
+  ],
+  "DetailOrders": [
+    {
+      "id": "814d",
+      "OrderDate": "2024-04-24 11:32",
+      "customer": {
+        "cusId": "dsaf22q3132",
+        "name": "Nguyễn Hoàng Anh",
+        "email": "hn54707@gmail.com",
+        "phone": "0828053208",
+        "address": "T.p Yên Bái"
+      },
+      "products": [
+        {
+          "id": "P02",
+          "name": "May Tinh Pana",
+          "price": 10000,
+          "quantity": 100,
+          "cataID": 1,
+          "createAt": "2024-04-18",
+          "isActive": true,
+          "image": "../images/1.jpg",
+          "userQuantity": 4
+        },
+        {
+          "id": "P03",
+          "name": "Noi Com Pana",
+          "price": 10,
+          "quantity": 5,
+          "cataID": 2,
+          "createAt": "2022-10-10",
+          "isActive": false,
+          "image": "../images/1.jpg",
+          "userQuantity": 4
+        }
+      ]
+    },
+    {
+      "id": "1553",
+      "OrderDate": "2024-04-24 11:33",
+      "customer": {
+        "cusId": "",
+        "name": "Nguyễn Hoàng Anh",
+        "email": "anhnhhe176236@fpt.edu.vn",
+        "phone": "0828053208",
+        "address": "T.p Yên Bái"
+      },
+      "products": [
+        {
+          "id": "P02",
+          "name": "May Tinh Pana",
+          "price": 10000,
+          "quantity": 100,
+          "cataID": 1,
+          "createAt": "2024-04-18",
+          "isActive": true,
+          "image": "../images/1.jpg",
+          "userQuantity": 1
+        },
+        {
+          "id": "P03",
+          "name": "Noi Com Pana",
+          "price": 10,
+          "quantity": 5,
+          "cataID": 2,
+          "createAt": "2022-10-10",
+          "isActive": false,
+          "image": "../images/1.jpg",
+          "userQuantity": 2
+        }
+      ]
+    },
+    {
+      "id": "7abe",
+      "OrderDate": "2024-04-24 11:42",
+      "customer": {
+        "cusId": "",
+        "name": "Nguyễn Hoàng Anh",
+        "email": "anhnhhe176236@fpt.edu.vn",
+        "phone": "0828053208",
+        "address": "T.p Yên Bái"
+      },
+      "products": [
+        {
+          "id": "P02",
+          "name": "May Tinh Pana",
+          "price": 10000,
+          "quantity": 100,
+          "cataID": 1,
+          "createAt": "2024-04-18",
+          "isActive": true,
+          "image": "../images/1.jpg",
+          "userQuantity": 2
+        },
+        {
+          "id": "P03",
+          "name": "Noi Com Pana",
+          "price": 10,
+          "quantity": 5,
+          "cataID": 2,
+          "createAt": "2022-10-10",
+          "isActive": false,
+          "image": "../images/1.jpg",
+          "userQuantity": 3
+        }
+      ]
+    },
+    {
+      "id": "2a53",
+      "OrderDate": "2024-04-24 11:47",
+      "customer": {
+        "cusId": "",
+        "name": "Nguyễn Hoàng Anh",
+        "email": "anhnhhe176236@fpt.edu.vn",
+        "phone": "0828053208",
+        "address": "T.p Yên Bái"
+      },
+      "products": [
+        {
+          "id": "P02",
+          "name": "May Tinh Pana",
+          "price": 10000,
+          "quantity": 100,
+          "cataID": 1,
+          "createAt": "2024-04-18",
+          "isActive": true,
+          "image": "../images/1.jpg",
+          "userQuantity": 2
+        },
+        {
+          "id": "P03",
+          "name": "Noi Com Pana",
+          "price": 10,
+          "quantity": 5,
+          "cataID": 2,
+          "createAt": "2022-10-10",
+          "isActive": false,
+          "image": "../images/1.jpg",
+          "userQuantity": 3
+        }
+      ]
+    }
+  ]
+}
