@@ -4,6 +4,10 @@ const router = express.Router();
 const moment = require('moment');
 const cors = require('cors');
 const axios = require('axios');
+const nodemailer = require('nodemailer');
+const google = require('googleapis');
+const sendMail = require('./sendMail');
+require('dotenv').config();
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
@@ -50,7 +54,7 @@ router.post('/create_payment_url', function (req, res, next) {
     if (bankCode !== null && bankCode !== '') {
         vnp_Params['vnp_BankCode'] = bankCode;
     }
-    
+
     vnp_Params = sortObject(vnp_Params);
 
     let querystring = require('qs');
@@ -60,18 +64,28 @@ router.post('/create_payment_url', function (req, res, next) {
     let signed = hmac.update(new Buffer(signData, 'utf-8')).digest("hex");
     vnp_Params['vnp_SecureHash'] = signed;
     vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false });
-    let customer = req.body.customer;
-    let products = req.body.products;
-    let order = {
-        OrderDate: orderDate,
-        customer: customer,
-        products: products
-    };
-    axios.post('http://localhost:3000/detailOrders', order);
-    res.json({
-        redirectUrl: vnpUrl
-    });
-
+    const saveToDb = async () => {
+        try {
+            let customer = req.body.customer;
+            let products = req.body.products;
+            let order = {
+                id: orderId,
+                OrderDate: orderDate,
+                Amount: amount,
+                OrderInfo: vnp_Params['vnp_OrderInfo'],
+                bankCode: bankCode,
+                customer: customer,
+                products: products
+            };
+            await axios.post('http://localhost:3000/detailOrders', order);
+        } catch (error) {
+            console.log(error);
+        }
+        res.json({
+            redirectUrl: vnpUrl
+        });
+    }
+    saveToDb();
 });
 
 router.get('/vnpay_return', function (req, res, next) {
@@ -91,18 +105,36 @@ router.get('/vnpay_return', function (req, res, next) {
     let crypto = require("crypto");
     let hmac = crypto.createHmac("sha512", secretKey);
     let signed = hmac.update(new Buffer(signData, 'utf-8')).digest("hex");
-    
+
     if (secureHash === signed) {
-        
-        res.redirect('http://localhost:3001/success');
+        const orderId = vnp_Params['vnp_TxnRef'];
+        const getData = async () => {
+            const response = await axios.get(`http://localhost:3000/detailOrders/${orderId}`)
+                .then(response => {
+                    return response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+
+        }
+        const orderInfo = getData();
+        console.log(orderInfo);
+        if (orderInfo) {
+            // sendMail(orderInfo)
+            //     .then(() => res.send('Email sent successfully!'))
+            //     .catch(error => {
+            //         console.error('Error sending email:', error);
+            //         res.status(500).send('Failed to send email');
+            //     });
+            res.redirect(`http://localhost:3001/success`);
+        } else {
+            res.redirect('http://localhost:3001/fail');
+        }
     } else {
         res.redirect('http://localhost:3001/fail');
     }
 });
-
-
-
-
 app.use('/api', router);
 
 const PORT = process.env.PORT || 5000;
